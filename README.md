@@ -26,8 +26,74 @@ So they're really, really similar. The difference is that a trusted internet cer
 private CA isa the same as public CA.  
 The difference is that Apple, Mozilla, Microsoft,have decided to trust these public CAs ans they put these root certificates on every system that they distribute.
 
+
+
+
+
+
+
+
+
+
 ##4. Common Types of SSL Certificates
 ###2 Certificates that chain to the root
 mac:  
 ####01:17  
 keychain access->certificate assitant->evaluate a certificate
+
+
+
+
+
+
+
+
+
+
+
+##6. Check Your Expiration Dates
+###2 Revoking a certificate
+####01:03
+```
+openssl cs -revoke ../ke.pem
+```
+
+###3 Setting up a certificate-revocation list
+```
+cd /System/Library/OpenSSL
+```
+edit
+```
+vim openssl.cnf
+```
+comment out
+```
+#crlnumber = 
+```
+then
+```
+cd groundswell
+mkdir crl
+```
+####02:06
+```
+openssl ca -config openssl.cnf -gencrl -out groundswell/crl/crl.pem
+```
+###4 Renewing a certificate
+```
+openssl req -new -new -nodes -out /System/Library/OpenSSL/groundswell/req/ke.req
+```
+So this next part is going to approve and sign the request and generate a new certificate that is not revoked. 
+```
+openssl ca -config /System/Library/OpenSSL/openssl.cnf -policy policy_anythind -out /System/Library/OpenSSL/groundswell/certs/ke.pem -infiles /System/Library/OpenSSL/groundswell/req/ke.req
+```
+
+
+
+
+##7. Protexting your
+###2 Archiving in a secure and recoverable way
+
+
+
+
