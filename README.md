@@ -47,6 +47,38 @@ keychain access->certificate assitant->evaluate a certificate
 
 
 
+##5. Using Certificates
+###1 Creating a demo certificate authority
+openssl.cnf
+```
+dir =./groundswell
+```
+####06:25
+```
+cd groundswell
+mkdir certs &&mkdir req &&mkdir newcerts &&mkdir private
+echo "01" > serial && touch index.txt
+```
+
+###2 Generating a server certificate
+```
+openssl req -new -x509 -newkey rsa:2048 -keyout private/cakey.pem -out cacert.pem -days 365
+```
+
+###3 Installing your certificate on a client system
+In the last step we created our certificate authority. In this step we're going to create the certificate and the certificate signing request. 
+```
+openssl req -new -nodes -newkey rsa:1024 -keyout private/ke.key -out req.ke.req -days 1095
+```
+
+
+
+
+
+
+
+
+
 
 
 
